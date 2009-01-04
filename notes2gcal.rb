@@ -17,10 +17,10 @@ require 'notes_lib'
 
 # Configuration
 NS = Notes::NotesSession.new
-DB = NS.GetDatabase("", "mail/AAAAA.nsf")
-GCAL_ACCOUNT = "AAAAA@gmail.com"
+DB = NS.GetDatabase("", "mail/MAIL.nsf")
+GCAL_ACCOUNT = "username@gmail.com"
 GCAL_PASSWORD = "password"
-GCAL_FEED = "http://www.google.com/calendar/feeds/******%40group.calendar.google.com/private/full"
+GCAL_FEED = "http://www.google.com/calendar/feeds/hogehoge%40group.calendar.google.com/private/full"
 
 GCAL_DEL = true
 verbose  = true
@@ -91,7 +91,7 @@ view.each { |doc|
 
 		if ns_id.assoc("#{doc['APPTUNID'].text}")
 
-			# ŒJ‚è•Ô‚µ‚ªEvent(I“ú—\’è)‚Ìê‡‚É‚Í1Œ“o˜^‚·‚ê‚Î—Ç‚¢
+			# ç¹°ã‚Šè¿”ã—ãŒEvent(çµ‚æ—¥äºˆå®š)ã®å ´åˆã«ã¯1ä»¶ç™»éŒ²ã™ã‚Œã°è‰¯ã„
 			if ns_allday
 				next
 			end
@@ -104,7 +104,7 @@ view.each { |doc|
 			number = ns_id_num[1] + 1
 			ns_date_st = Time.parse("#{ns_date_st_array[number]}")
 
-			# “ú•t‚ğ’u‚«Š·‚¦‚é
+			# æ—¥ä»˜ã‚’ç½®ãæ›ãˆã‚‹
 			ns_date_tmp = Time.parse("#{doc['EndDateTime']}")
 			ns_date_en = Time.parse("#{ns_date_st.year}/#{ns_date_st.month}/#{ns_date_st.day} #{ns_date_tmp.hour}:#{ns_date_tmp.min}")
 
@@ -117,8 +117,8 @@ view.each { |doc|
 		end
 
 		# data check * add 2008/10/06
-		#   * st < en ‚ÌƒP[ƒX‚ª‡‚Á‚½‚Ì‚ÅC³
-		#   * ‹­§“I‚ÉI—¹“ú‚ğŠJn“ú‚É‘µ‚¦‚é
+		#   * st < en ã®ã‚±ãƒ¼ã‚¹ãŒåˆã£ãŸã®ã§ä¿®æ­£
+		#   * å¼·åˆ¶çš„ã«çµ‚äº†æ—¥æ™‚ã‚’é–‹å§‹æ—¥æ™‚ã«æƒãˆã‚‹
 		if ns_date_st > ns_date_en 
 			STDOUT .print "NG\n"
 			STDOUT .print "#{ns_date_st} .. #{ns_date_en}\n"
